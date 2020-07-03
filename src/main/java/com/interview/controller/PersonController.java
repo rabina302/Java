@@ -25,9 +25,9 @@ public class PersonController {
     public ResponseEntity<?> findByScannedBy(@PathVariable String scannedBy){
         return new ResponseEntity<>(service.findByScannedBy(scannedBy), HttpStatus.OK);
     }
-    @GetMapping("/{scannedBy}")
-    public ResponseEntity<?> findByDecision(@PathVariable String decision){
-        return new ResponseEntity<>(service.findByDecision(decision), HttpStatus.OK);
+    @GetMapping("/{decision}")
+    public ResponseEntity<?> findByDecision(@PathVariable String qualifiedDisqualified){
+        return new ResponseEntity<>(service.findByDecision(qualifiedDisqualified), HttpStatus.OK);
     }
 
 }

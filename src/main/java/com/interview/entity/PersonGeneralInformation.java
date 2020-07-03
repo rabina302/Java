@@ -1,29 +1,47 @@
 package com.interview.entity;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-
- class PersonGeneralInformation {
-    private Long id;
-    private  String firstName;
+@Table(name = "person_general_information")
+public
+class PersonGeneralInformation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String firstName;
     private String lastName;
     private String middleInitial;
     private String email;
-    private String email2;
+    private String email_2;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personInfo")
+    private PersonDetails personDetails;
 
     public PersonGeneralInformation() {
     }
 
+    public PersonGeneralInformation(String firstName, String lastName, String middleInitial, String email, String email_2, PersonDetails personDetails) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleInitial = middleInitial;
+        this.email = email;
+        this.email_2 = email_2;
+        this.personDetails = personDetails;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public PersonDetails getPersonDetails() {
+        return personDetails;
+    }
+
+    public void setPersonDetails(PersonDetails personDetails) {
+        this.personDetails = personDetails;
     }
 
     public String getFirstName() {
@@ -42,11 +60,15 @@ import javax.persistence.Id;
         return email;
     }
 
-    public String getEmail2() {
-        return email2;
+    public String getEmail_2() {
+        return email_2;
     }
 
-    public void setId(Long id) {
+    public void setEmail_2(String email_2) {
+        this.email_2 = email_2;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -66,7 +88,4 @@ import javax.persistence.Id;
         this.email = email;
     }
 
-    public void setEmail2(String email2) {
-        this.email2 = email2;
-    }
 }

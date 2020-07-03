@@ -17,14 +17,8 @@ public class PersonServiceImplementation implements PersonService {
     public PersonServiceImplementation(PersonsRepo personsRepo) {
         this.personsRepo = personsRepo;
     }
-//    @Override
-//    public List<Persons> getAll() {
-//        return personsRepo.findAll(new Sort(Sort.Direction.ASC,"firstName"));
-//    }
-
     @Override
     public List<Persons> findByCountryId(String countryId) {
-
         return personsRepo.findByCountryId(countryId);
     }
 
